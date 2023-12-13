@@ -8,10 +8,6 @@ import com.mintokoneko.todo.data.User
 import com.mintokoneko.todo.utils.SHARED_PREFERENCES_NAME
 import com.mintokoneko.todo.utils.USER_NAME_PREFERENCE_NAME
 import com.mintokoneko.todo.utils.USER_PHOTO_URI_PREFERENCE_NAME
-import kotlinx.coroutines.channels.Channel
-import kotlinx.coroutines.channels.awaitClose
-import kotlinx.coroutines.flow.buffer
-import kotlinx.coroutines.flow.callbackFlow
 
 class AppSharedPreferences(context: Context) {
     private val sharedPreferences: SharedPreferences =

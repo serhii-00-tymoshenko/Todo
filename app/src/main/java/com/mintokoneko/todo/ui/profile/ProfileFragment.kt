@@ -1,9 +1,6 @@
 package com.mintokoneko.todo.ui.profile
 
 import android.content.Context
-import android.graphics.Bitmap
-import android.graphics.drawable.BitmapDrawable
-import android.graphics.drawable.Drawable
 import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -13,19 +10,14 @@ import android.widget.Toast
 import androidx.activity.result.PickVisualMediaRequest
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentActivity
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
-import com.bumptech.glide.request.target.CustomTarget
-import com.bumptech.glide.request.transition.Transition
 import com.mintokoneko.todo.R
-import com.mintokoneko.todo.base.BaseViewModel
 import com.mintokoneko.todo.base.BaseViewModelProvider
 import com.mintokoneko.todo.data.User
 import com.mintokoneko.todo.databinding.FragmentProfileBinding
 import com.mintokoneko.todo.repositories.UserRepository
 import com.mintokoneko.todo.ui.profile.view_model.ProfileViewModel
-import com.mintokoneko.todo.utils.dpToPx
 
 class ProfileFragment : Fragment() {
     private var _binding: FragmentProfileBinding? = null
@@ -77,10 +69,11 @@ class ProfileFragment : Fragment() {
     }
 
     private fun setOnClickListeners(context: Context) {
-        val pickMedia = registerForActivityResult(ActivityResultContracts.PickVisualMedia()) { uri ->
-            photoUri = uri
-            setUserProfilePhoto(photoUri)
-        }
+        val pickMedia =
+            registerForActivityResult(ActivityResultContracts.PickVisualMedia()) { uri ->
+                photoUri = uri
+                setUserProfilePhoto(photoUri)
+            }
 
         binding.apply {
             saveUserDetails.setOnClickListener {
@@ -98,7 +91,8 @@ class ProfileFragment : Fragment() {
     }
 
     private fun initProfileViewModel(fragment: Fragment, context: Context) {
-        profileViewModel = BaseViewModelProvider.getInstance().getViewModel(fragment, UserRepository(context))
+        profileViewModel =
+            BaseViewModelProvider.getInstance().getViewModel(fragment, UserRepository(context))
     }
 
     companion object {

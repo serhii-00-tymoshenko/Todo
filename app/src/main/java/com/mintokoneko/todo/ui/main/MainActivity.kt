@@ -1,15 +1,15 @@
 package com.mintokoneko.todo.ui.main
 
 import android.content.Context
-import android.content.res.ColorStateList
 import android.graphics.Bitmap
+import android.graphics.PorterDuff
 import android.graphics.drawable.BitmapDrawable
 import android.graphics.drawable.Drawable
 import android.net.Uri
 import android.os.Bundle
 import android.view.MenuItem
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.MenuItemCompat
 import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.ViewModelStoreOwner
@@ -64,11 +64,11 @@ class MainActivity : AppCompatActivity() {
         val fragmentManager = supportFragmentManager
 
         setupBottomNavigation(fragmentManager, fragmentContainerId)
-        setupBottomNavigationBehavior()
+        setInvisibleTintMode(profileMenuItem)
     }
 
-    private fun setupBottomNavigationBehavior() {
-        bottomNavigation.itemIconTintList = null
+    private fun setInvisibleTintMode(menuItem: MenuItem) {
+        MenuItemCompat.setIconTintMode(menuItem, PorterDuff.Mode.DST)
     }
 
     private fun setupBottomNavigation(fragmentManager: FragmentManager, fragmentContainerId: Int) {
