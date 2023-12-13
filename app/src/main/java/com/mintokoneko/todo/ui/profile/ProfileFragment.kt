@@ -18,13 +18,13 @@ import com.mintokoneko.todo.data.User
 import com.mintokoneko.todo.databinding.FragmentProfileBinding
 import com.mintokoneko.todo.repositories.UserRepository
 import com.mintokoneko.todo.ui.profile.view_model.ProfileViewModel
+import com.mintokoneko.todo.utils.hideKeyboard
 
 class ProfileFragment : Fragment() {
     private var _binding: FragmentProfileBinding? = null
     private val binding get() = _binding!!
 
     private lateinit var profileViewModel: ProfileViewModel
-
     private var photoUri: Uri? = null
 
     override fun onCreateView(
@@ -39,10 +39,11 @@ class ProfileFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         val context = requireContext()
+        val view = requireView()
 
         initProfileViewModel(this, context)
         setContent(getUserDetails())
-        setOnClickListeners(context)
+        setOnClickListeners(context, view)
     }
 
     private fun setContent(user: User) {
@@ -68,7 +69,7 @@ class ProfileFragment : Fragment() {
             .into(binding.userProfilePhoto)
     }
 
-    private fun setOnClickListeners(context: Context) {
+    private fun setOnClickListeners(context: Context, view: View) {
         val pickMedia =
             registerForActivityResult(ActivityResultContracts.PickVisualMedia()) { uri ->
                 photoUri = uri
@@ -80,6 +81,7 @@ class ProfileFragment : Fragment() {
                 val username = usernameField.editText?.text.toString()
                 if (photoUri != null && username.isNotEmpty()) {
                     profileViewModel.setUserDetails(User(username, photoUri))
+                    clearFocus(view, context, usernameField)
                 } else {
                     Toast.makeText(context, "Something went wrong", Toast.LENGTH_SHORT).show()
                 }
@@ -88,6 +90,11 @@ class ProfileFragment : Fragment() {
                 pickMedia.launch(PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageOnly))
             }
         }
+    }
+
+    private fun clearFocus(view: View, context: Context, viewToClearFocus: View) {
+        viewToClearFocus.clearFocus()
+        hideKeyboard(view, context)
     }
 
     private fun initProfileViewModel(fragment: Fragment, context: Context) {

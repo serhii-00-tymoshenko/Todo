@@ -1,11 +1,14 @@
 package com.mintokoneko.todo.utils
 
+import android.content.Context
 import android.content.res.Resources
 import android.graphics.Bitmap
 import android.graphics.Canvas
 import android.graphics.Paint
 import android.graphics.PorterDuff
 import android.graphics.PorterDuffXfermode
+import android.view.View
+import android.view.inputmethod.InputMethodManager
 
 fun dpToPx(dp: Int): Int {
     return (dp * Resources.getSystem().displayMetrics.density).toInt()
@@ -51,4 +54,10 @@ fun Bitmap.createBitmapWithBorder(borderSize: Float, borderColor: Int): Bitmap {
     paint.strokeWidth = borderSize
     canvas.drawCircle(centerX, centerY, circleRadius, paint)
     return newBitmap
+}
+
+fun hideKeyboard(view: View, context: Context) {
+    val imm = context.getSystemService(Context.INPUT_METHOD_SERVICE) as? InputMethodManager
+    imm?.hideSoftInputFromWindow(view.windowToken, 0)
+
 }
