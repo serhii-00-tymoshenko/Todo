@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">Todo</string>
+
+    <string name="profile_menu_item_title">Profile</string>
+    <string name="username_field_hint">Username</string>
+    <string name="save_user_details_text">Save user details</string>
+    <string name="user_profile_photo_description">User profile photo</string>
+</resources>
