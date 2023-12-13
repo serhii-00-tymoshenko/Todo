@@ -10,6 +10,7 @@ import android.os.Bundle
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.MenuItemCompat
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.ViewModelStoreOwner
@@ -26,6 +27,7 @@ import com.mintokoneko.todo.repositories.UserRepository
 import com.mintokoneko.todo.ui.main.view_model.MainViewModel
 import com.mintokoneko.todo.ui.profile.ProfileFragment
 import com.mintokoneko.todo.ui.tasks.TasksFragment
+import com.mintokoneko.todo.utils.createBitmapWithBorder
 import com.mintokoneko.todo.utils.dpToPx
 
 class MainActivity : AppCompatActivity() {
@@ -75,24 +77,29 @@ class MainActivity : AppCompatActivity() {
         bottomNavigation.setOnItemSelectedListener { menuItem ->
             when (menuItem.itemId) {
                 R.id.todo_menu_item -> {
-                    fragmentManager
-                        .beginTransaction()
-                        .replace(fragmentContainerId, TasksFragment.newInstance())
-                        .commit()
+                    beginTransaction(fragmentManager, fragmentContainerId, TasksFragment.newInstance())
                     true
                 }
 
                 R.id.profile_menu_item -> {
-                    fragmentManager
-                        .beginTransaction()
-                        .replace(fragmentContainerId, ProfileFragment.newInstance())
-                        .commit()
+                    beginTransaction(fragmentManager, fragmentContainerId, ProfileFragment.newInstance())
                     true
                 }
 
                 else -> false
             }
         }
+    }
+
+    private fun beginTransaction(
+        fragmentManager: FragmentManager,
+        fragmentContainerId: Int,
+        fragment: Fragment
+    ) {
+        fragmentManager
+            .beginTransaction()
+            .replace(fragmentContainerId, fragment)
+            .commit()
     }
 
     private fun changeProfileMenuItem(user: User) {
@@ -120,7 +127,7 @@ class MainActivity : AppCompatActivity() {
                     transition: Transition<in Bitmap>?
                 ) {
                     profileMenuItem.icon = BitmapDrawable(
-                        resources, resource
+                        resources, resource.createBitmapWithBorder(3f, R.color.black)
                     )
                 }
 

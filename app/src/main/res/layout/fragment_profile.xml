@@ -9,52 +9,46 @@
     <Button
         android:id="@+id/save_user_details"
         style="@style/Widget.Material3.Button.TonalButton"
-        android:layout_width="320dp"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
         android:text="@string/save_user_details_text"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintBottom_toBottomOf="@+id/user_profile_photo"
+        app:layout_constraintEnd_toStartOf="@+id/user_profile_photo"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/username_field" />
 
     <com.google.android.material.imageview.ShapeableImageView
         android:id="@+id/user_profile_photo"
         style="@style/ShapeAppearance.Material3.Corner.Full"
-        android:layout_width="320dp"
-        android:layout_height="320dp"
+        android:layout_width="112dp"
+        android:layout_height="112dp"
         android:layout_gravity="end"
-        android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
         android:clickable="true"
         android:contentDescription="@string/user_profile_photo_description"
         android:focusable="true"
-        android:foreground="?android:attr/selectableItemBackground"
+        android:foreground="@drawable/rounded_image_with_stroke"
         android:src="@drawable/ic_user"
-        app:layout_constraintBottom_toTopOf="@+id/username_field"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_chainStyle="packed" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/username_field"
         style="?attr/textInputFilledStyle"
-        android:layout_width="320dp"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
         android:hint="@string/username_field_hint"
         app:layout_constraintBottom_toTopOf="@+id/save_user_details"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintEnd_toStartOf="@+id/user_profile_photo"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/user_profile_photo">
+        app:layout_constraintTop_toTopOf="@+id/user_profile_photo"
+        app:layout_constraintVertical_chainStyle="packed">
 
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"

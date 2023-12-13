@@ -9,30 +9,29 @@ import com.mintokoneko.todo.ui.tasks.done_tasks.view_model.DoneTasksViewModel
 import com.mintokoneko.todo.ui.tasks.in_progress_tasks.view_model.InProgressTasksViewModel
 
 class BaseViewModelFactory(
-    private val baseRepository: BaseRepository,
+    private val repository: BaseRepository,
 ) : ViewModelProvider.Factory {
-    // Casts baseRepository
-    private inline fun <reified R> getCorrectRepository(): R = baseRepository as R
+    private inline fun <reified R> BaseRepository.cast(): R = this as R  // Casts baseRepository
 
     override fun <T : ViewModel> create(modelClass: Class<T>): T = when {
         modelClass.isAssignableFrom(DoneTasksViewModel::class.java) -> DoneTasksViewModel(
-            getCorrectRepository()
+            repository.cast()
         )
 
         modelClass.isAssignableFrom(InProgressTasksViewModel::class.java) -> InProgressTasksViewModel(
-            getCorrectRepository()
+            repository.cast()
         )
 
         modelClass.isAssignableFrom(DeletedTasksViewModel::class.java) -> DeletedTasksViewModel(
-            getCorrectRepository()
+            repository.cast()
         )
 
         modelClass.isAssignableFrom(MainViewModel::class.java) -> MainViewModel(
-            getCorrectRepository()
+            repository.cast()
         )
 
         modelClass.isAssignableFrom(ProfileViewModel::class.java) -> ProfileViewModel(
-            getCorrectRepository()
+            repository.cast()
         )
 
         else -> throw IllegalArgumentException("Wrong viewModel")
