@@ -1,4 +1,4 @@
-package com.mintokoneko.todo.ui.todo.in_progress_tasks.view_model
+package com.mintokoneko.todo.ui.todo.inprogresstasks.viewmodel
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

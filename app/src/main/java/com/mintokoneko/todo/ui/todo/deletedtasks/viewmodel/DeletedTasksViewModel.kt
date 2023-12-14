@@ -1,4 +1,4 @@
-package com.mintokoneko.todo.ui.todo.deleted_tasks.view_model
+package com.mintokoneko.todo.ui.todo.deletedtasks.viewmodel
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

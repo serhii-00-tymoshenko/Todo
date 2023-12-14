@@ -1,4 +1,4 @@
-package com.mintokoneko.todo.repositories.shared_preferences
+package com.mintokoneko.todo.repositories.sharedpreferences
 
 import android.content.Context
 import android.content.SharedPreferences
@@ -14,13 +14,10 @@ class AppSharedPreferences(context: Context) {
         context.getSharedPreferences(SHARED_PREFERENCES_NAME, Context.MODE_PRIVATE)
 
     companion object {
-        @Volatile
         private var instance: AppSharedPreferences? = null
 
         fun getInstance(context: Context) =
-            instance ?: synchronized(this) {
-                instance ?: AppSharedPreferences(context).also { instance = it }
-            }
+            instance ?: AppSharedPreferences(context).also { instance = it }
     }
 
     fun putUserDetails(user: User) {

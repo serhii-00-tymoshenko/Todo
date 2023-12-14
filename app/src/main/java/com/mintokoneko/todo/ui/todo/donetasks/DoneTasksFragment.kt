@@ -1,4 +1,4 @@
-package com.mintokoneko.todo.ui.todo.done_tasks
+package com.mintokoneko.todo.ui.todo.donetasks
 
 import android.content.Context
 import android.os.Bundle
@@ -11,7 +11,7 @@ import com.mintokoneko.todo.adapters.TaskAdapter
 import com.mintokoneko.todo.base.BaseViewModelProvider
 import com.mintokoneko.todo.databinding.FragmentDoneTasksBinding
 import com.mintokoneko.todo.repositories.TasksRepository
-import com.mintokoneko.todo.ui.todo.done_tasks.view_model.DoneTasksViewModel
+import com.mintokoneko.todo.ui.todo.donetasks.viewmodel.DoneTasksViewModel
 
 class DoneTasksFragment : Fragment() {
     private var _binding: FragmentDoneTasksBinding? = null

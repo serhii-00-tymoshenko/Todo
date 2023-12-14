@@ -1,4 +1,4 @@
-package com.mintokoneko.todo.ui.todo.deleted_tasks
+package com.mintokoneko.todo.ui.todo.deletedtasks
 
 import android.content.Context
 import android.os.Bundle
@@ -11,7 +11,7 @@ import com.mintokoneko.todo.adapters.TaskAdapter
 import com.mintokoneko.todo.base.BaseViewModelProvider
 import com.mintokoneko.todo.databinding.FragmentDeletedTasksBinding
 import com.mintokoneko.todo.repositories.TasksRepository
-import com.mintokoneko.todo.ui.todo.deleted_tasks.view_model.DeletedTasksViewModel
+import com.mintokoneko.todo.ui.todo.deletedtasks.viewmodel.DeletedTasksViewModel
 
 
 class DeletedTasksFragment : Fragment() {

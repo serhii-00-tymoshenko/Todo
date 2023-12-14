@@ -15,12 +15,9 @@ class UserRepository(context: Context) : BaseRepository(context) {
     }
 
     companion object {
-        @Volatile
         private var instance: UserRepository? = null
 
         fun getInstance(context: Context) =
-            instance ?: synchronized(this) {
-                instance ?: UserRepository(context).also { instance = it }
-            }
+            instance ?: UserRepository(context).also { instance = it }
     }
 }

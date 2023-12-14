@@ -1,4 +1,4 @@
-package com.mintokoneko.todo.ui.profile.view_model
+package com.mintokoneko.todo.ui.profile.viewmodel
 
 import com.mintokoneko.todo.base.BaseViewModel
 import com.mintokoneko.todo.data.User

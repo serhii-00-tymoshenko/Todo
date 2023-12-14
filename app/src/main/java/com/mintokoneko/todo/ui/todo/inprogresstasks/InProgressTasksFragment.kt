@@ -1,4 +1,4 @@
-package com.mintokoneko.todo.ui.todo.in_progress_tasks
+package com.mintokoneko.todo.ui.todo.inprogresstasks
 
 import android.content.Context
 import android.os.Bundle
@@ -11,7 +11,7 @@ import com.mintokoneko.todo.adapters.TaskAdapter
 import com.mintokoneko.todo.base.BaseViewModelProvider
 import com.mintokoneko.todo.databinding.FragmentInProgressTasksBinding
 import com.mintokoneko.todo.repositories.TasksRepository
-import com.mintokoneko.todo.ui.todo.in_progress_tasks.view_model.InProgressTasksViewModel
+import com.mintokoneko.todo.ui.todo.inprogresstasks.viewmodel.InProgressTasksViewModel
 
 
 class InProgressTasksFragment : Fragment() {

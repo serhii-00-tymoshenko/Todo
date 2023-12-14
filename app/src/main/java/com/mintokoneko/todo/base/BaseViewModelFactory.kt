@@ -2,11 +2,11 @@ package com.mintokoneko.todo.base
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.mintokoneko.todo.ui.main.view_model.MainViewModel
-import com.mintokoneko.todo.ui.profile.view_model.ProfileViewModel
-import com.mintokoneko.todo.ui.todo.deleted_tasks.view_model.DeletedTasksViewModel
-import com.mintokoneko.todo.ui.todo.done_tasks.view_model.DoneTasksViewModel
-import com.mintokoneko.todo.ui.todo.in_progress_tasks.view_model.InProgressTasksViewModel
+import com.mintokoneko.todo.ui.main.viewmodel.MainViewModel
+import com.mintokoneko.todo.ui.profile.viewmodel.ProfileViewModel
+import com.mintokoneko.todo.ui.todo.deletedtasks.viewmodel.DeletedTasksViewModel
+import com.mintokoneko.todo.ui.todo.donetasks.viewmodel.DoneTasksViewModel
+import com.mintokoneko.todo.ui.todo.inprogresstasks.viewmodel.InProgressTasksViewModel
 
 class BaseViewModelFactory(
     private val repository: BaseRepository,

@@ -24,7 +24,7 @@ import com.mintokoneko.todo.base.BaseViewModelProvider
 import com.mintokoneko.todo.data.User
 import com.mintokoneko.todo.databinding.ActivityMainBinding
 import com.mintokoneko.todo.repositories.UserRepository
-import com.mintokoneko.todo.ui.main.view_model.MainViewModel
+import com.mintokoneko.todo.ui.main.viewmodel.MainViewModel
 import com.mintokoneko.todo.ui.profile.ProfileFragment
 import com.mintokoneko.todo.ui.todo.TodoFragment
 import com.mintokoneko.todo.utils.createBitmapWithBorder

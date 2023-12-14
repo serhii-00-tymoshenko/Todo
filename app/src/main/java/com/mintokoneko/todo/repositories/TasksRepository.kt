@@ -33,12 +33,9 @@ class TasksRepository(context: Context) : BaseRepository(context) {
         )
 
     companion object {
-        @Volatile
         private var instance: TasksRepository? = null
 
         fun getInstance(context: Context) =
-            instance ?: synchronized(this) {
-                instance ?: TasksRepository(context).also { instance = it }
-            }
+            instance ?: TasksRepository(context).also { instance = it }
     }
 }

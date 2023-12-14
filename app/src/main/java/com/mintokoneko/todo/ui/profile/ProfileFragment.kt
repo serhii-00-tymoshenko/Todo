@@ -17,7 +17,7 @@ import com.mintokoneko.todo.base.BaseViewModelProvider
 import com.mintokoneko.todo.data.User
 import com.mintokoneko.todo.databinding.FragmentProfileBinding
 import com.mintokoneko.todo.repositories.UserRepository
-import com.mintokoneko.todo.ui.profile.view_model.ProfileViewModel
+import com.mintokoneko.todo.ui.profile.viewmodel.ProfileViewModel
 import com.mintokoneko.todo.utils.hideKeyboard
 
 class ProfileFragment : Fragment() {

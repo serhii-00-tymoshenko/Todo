@@ -1,4 +1,4 @@
-package com.mintokoneko.todo.ui.main.view_model
+package com.mintokoneko.todo.ui.main.viewmodel
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
