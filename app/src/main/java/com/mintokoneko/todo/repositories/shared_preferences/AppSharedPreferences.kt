@@ -50,7 +50,7 @@ class AppSharedPreferences(context: Context) {
     }
 
     private fun getUserPhotoUri(): Uri {
-        val photoUri = sharedPreferences.getString(USER_PHOTO_URI_PREFERENCE_NAME, "")!!.toUri()
+        val photoUri = sharedPreferences.getString(USER_PHOTO_URI_PREFERENCE_NAME, null)!!.toUri()
         return photoUri
     }
 

@@ -39,12 +39,18 @@ class ProfileFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         val context = requireContext()
-        val view = requireView()
-
         initProfileViewModel(this, context)
-        setContent(getUserDetails())
+        val user = getUserDetails()
+        setContent(user)
         setOnClickListeners(context, view)
     }
+
+    private fun initProfileViewModel(fragment: Fragment, context: Context) {
+        profileViewModel =
+            BaseViewModelProvider.getInstance().getViewModel(fragment, UserRepository(context))
+    }
+
+    private fun getUserDetails(): User = profileViewModel.getUserDetails()
 
     private fun setContent(user: User) {
         photoUri = user.photoUri
@@ -55,8 +61,6 @@ class ProfileFragment : Fragment() {
     private fun setUsername(name: String) {
         binding.usernameField.editText?.setText(name)
     }
-
-    private fun getUserDetails(): User = profileViewModel.getUserDetails()
 
     private fun setUserProfilePhoto(photoUri: Uri?) {
         Glide.with(this)
@@ -97,18 +101,7 @@ class ProfileFragment : Fragment() {
         hideKeyboard(view, context)
     }
 
-    private fun initProfileViewModel(fragment: Fragment, context: Context) {
-        profileViewModel =
-            BaseViewModelProvider.getInstance().getViewModel(fragment, UserRepository(context))
-    }
-
     companion object {
-
-        @JvmStatic
-        fun newInstance() =
-            ProfileFragment().apply {
-                arguments = Bundle().apply {
-                }
-            }
+        const val PROFILE_FRAGMENT_TAG = "Profile"
     }
 }

@@ -4,9 +4,9 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.mintokoneko.todo.ui.main.view_model.MainViewModel
 import com.mintokoneko.todo.ui.profile.view_model.ProfileViewModel
-import com.mintokoneko.todo.ui.tasks.deleted_tasks.view_model.DeletedTasksViewModel
-import com.mintokoneko.todo.ui.tasks.done_tasks.view_model.DoneTasksViewModel
-import com.mintokoneko.todo.ui.tasks.in_progress_tasks.view_model.InProgressTasksViewModel
+import com.mintokoneko.todo.ui.todo.deleted_tasks.view_model.DeletedTasksViewModel
+import com.mintokoneko.todo.ui.todo.done_tasks.view_model.DoneTasksViewModel
+import com.mintokoneko.todo.ui.todo.in_progress_tasks.view_model.InProgressTasksViewModel
 
 class BaseViewModelFactory(
     private val repository: BaseRepository,

@@ -1,4 +1,4 @@
-package com.mintokoneko.todo.ui.tasks.done_tasks
+package com.mintokoneko.todo.ui.todo.done_tasks
 
 import android.content.Context
 import android.os.Bundle
@@ -8,10 +8,10 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.mintokoneko.todo.adapters.TaskAdapter
+import com.mintokoneko.todo.base.BaseViewModelProvider
 import com.mintokoneko.todo.databinding.FragmentDoneTasksBinding
 import com.mintokoneko.todo.repositories.TasksRepository
-import com.mintokoneko.todo.base.BaseViewModelProvider
-import com.mintokoneko.todo.ui.tasks.done_tasks.view_model.DoneTasksViewModel
+import com.mintokoneko.todo.ui.todo.done_tasks.view_model.DoneTasksViewModel
 
 class DoneTasksFragment : Fragment() {
     private var _binding: FragmentDoneTasksBinding? = null
@@ -32,16 +32,15 @@ class DoneTasksFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         val context = requireContext()
-
         initTasksViewModel(this, context)
         setupRecyclers(context)
         initObservers()
     }
 
-    private fun initObservers() {
-        doneTasksViewModel.doneTasks.observe(viewLifecycleOwner) { doneTasks ->
-            taskAdapter.submitList(doneTasks)
-        }
+    private fun initTasksViewModel(fragment: Fragment, context: Context) {
+        val tasksRepository = TasksRepository.getInstance(context)
+        doneTasksViewModel =
+            BaseViewModelProvider.getInstance().getViewModel(fragment, tasksRepository)
     }
 
     private fun setupRecyclers(context: Context) {
@@ -59,19 +58,13 @@ class DoneTasksFragment : Fragment() {
         }
     }
 
-
-    private fun initTasksViewModel(fragment: Fragment, context: Context) {
-        val tasksRepository = TasksRepository.getInstance(context)
-        doneTasksViewModel =
-            BaseViewModelProvider.getInstance().getViewModel(fragment, tasksRepository)
+    private fun initObservers() {
+        doneTasksViewModel.doneTasks.observe(viewLifecycleOwner) { doneTasks ->
+            taskAdapter.submitList(doneTasks)
+        }
     }
 
     companion object {
-
-        @JvmStatic
-        fun newInstance() =
-            DoneTasksFragment().apply {
-                arguments = Bundle().apply { }
-            }
+        const val DONE_TASKS_FRAGMENT_TAG = "Done tasks"
     }
 }

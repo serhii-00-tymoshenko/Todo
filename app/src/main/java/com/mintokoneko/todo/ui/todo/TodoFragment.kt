@@ -1,24 +1,22 @@
-package com.mintokoneko.todo.ui.tasks
+package com.mintokoneko.todo.ui.todo
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 import com.mintokoneko.todo.adapters.TabAdapter
-import com.mintokoneko.todo.databinding.FragmentTasksBinding
+import com.mintokoneko.todo.databinding.FragmentTodoBinding
 
-class TasksFragment : Fragment() {
-    private var _binding: FragmentTasksBinding? = null
+class TodoFragment : Fragment() {
+    private var _binding: FragmentTodoBinding? = null
     private val binding get() = _binding!!
 
     private lateinit var tabAdapter: TabAdapter
-    private lateinit var tabsPager: ViewPager2
-    private lateinit var tabLayout: TabLayout
 
     private val tabNames =
         listOf(
@@ -31,7 +29,7 @@ class TasksFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentTasksBinding.inflate(inflater, container, false)
+        _binding = FragmentTodoBinding.inflate(inflater, container, false)
         return binding.root
     }
 
@@ -39,35 +37,29 @@ class TasksFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         val fragmentActivity = requireActivity()
-
         setupContent(fragmentActivity)
     }
 
     private fun setupContent(fragmentActivity: FragmentActivity) {
         tabAdapter = TabAdapter(fragmentActivity, tabNames.size)
-        tabLayout = binding.tabLayout
-        tabsPager = binding.tabsPager
+        val tabLayout = binding.tabLayout
+        val tabsPager = binding.tabsPager
 
-        setupTabsPager()
-        setupTabMediator()
+        setupTabsPager(tabsPager)
+        setupTabMediator(tabLayout, tabsPager)
     }
 
-    private fun setupTabMediator() {
+    private fun setupTabsPager(tabsPager: ViewPager2) {
+        tabsPager.adapter = tabAdapter
+    }
+
+    private fun setupTabMediator(tabLayout: TabLayout, tabsPager: ViewPager2) {
         TabLayoutMediator(tabLayout, tabsPager) { tab, position ->
             tab.text = tabNames[position]
         }.attach()
     }
 
-    private fun setupTabsPager() {
-        tabsPager.adapter = tabAdapter
-    }
-
     companion object {
-
-        @JvmStatic
-        fun newInstance() =
-            TasksFragment().apply {
-                arguments = Bundle().apply { }
-            }
+        const val TODO_FRAGMENT_TAG = "Todo"
     }
 }

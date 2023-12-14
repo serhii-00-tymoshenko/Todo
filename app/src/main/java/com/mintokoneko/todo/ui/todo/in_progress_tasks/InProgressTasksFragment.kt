@@ -1,4 +1,4 @@
-package com.mintokoneko.todo.ui.tasks.in_progress_tasks
+package com.mintokoneko.todo.ui.todo.in_progress_tasks
 
 import android.content.Context
 import android.os.Bundle
@@ -8,10 +8,10 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.mintokoneko.todo.adapters.TaskAdapter
+import com.mintokoneko.todo.base.BaseViewModelProvider
 import com.mintokoneko.todo.databinding.FragmentInProgressTasksBinding
 import com.mintokoneko.todo.repositories.TasksRepository
-import com.mintokoneko.todo.base.BaseViewModelProvider
-import com.mintokoneko.todo.ui.tasks.in_progress_tasks.view_model.InProgressTasksViewModel
+import com.mintokoneko.todo.ui.todo.in_progress_tasks.view_model.InProgressTasksViewModel
 
 
 class InProgressTasksFragment : Fragment() {
@@ -33,7 +33,6 @@ class InProgressTasksFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         val context = requireContext()
-
         initTasksViewModel(this, context)
         setupRecyclers(context)
         initObservers()
@@ -67,11 +66,6 @@ class InProgressTasksFragment : Fragment() {
     }
 
     companion object {
-
-        @JvmStatic
-        fun newInstance() =
-            InProgressTasksFragment().apply {
-                arguments = Bundle().apply { }
-            }
+        const val IN_PROGRESS_TASKS_FRAGMENT_TAG = "In progress tasks"
     }
 }

@@ -26,7 +26,7 @@ import com.mintokoneko.todo.databinding.ActivityMainBinding
 import com.mintokoneko.todo.repositories.UserRepository
 import com.mintokoneko.todo.ui.main.view_model.MainViewModel
 import com.mintokoneko.todo.ui.profile.ProfileFragment
-import com.mintokoneko.todo.ui.tasks.TasksFragment
+import com.mintokoneko.todo.ui.todo.TodoFragment
 import com.mintokoneko.todo.utils.createBitmapWithBorder
 import com.mintokoneko.todo.utils.dpToPx
 
@@ -43,14 +43,8 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         initMainViewModel(this, this)
-        initObservers(this)
         setupNavigation()
-    }
-
-    private fun initObservers(owner: LifecycleOwner) {
-        mainViewModel.userDetails.observe(owner) { user ->
-            changeProfileMenuItem(user)
-        }
+        initObservers(this)
     }
 
     private fun initMainViewModel(owner: ViewModelStoreOwner, context: Context) {
@@ -62,33 +56,33 @@ class MainActivity : AppCompatActivity() {
         bottomNavigation = binding.bottomNavigation
         profileMenuItem = bottomNavigation.menu.findItem(R.id.profile_menu_item)
 
-        val fragmentContainerId = binding.mainFragmentContainer.id
+        val fragmentContainerId = binding.mainContainer.id
         val fragmentManager = supportFragmentManager
 
         setupBottomNavigation(fragmentManager, fragmentContainerId)
         setInvisibleTintMode(profileMenuItem)
     }
 
-    private fun setInvisibleTintMode(menuItem: MenuItem) {
-        MenuItemCompat.setIconTintMode(menuItem, PorterDuff.Mode.DST)
-    }
-
     private fun setupBottomNavigation(fragmentManager: FragmentManager, fragmentContainerId: Int) {
         bottomNavigation.setOnItemSelectedListener { menuItem ->
             when (menuItem.itemId) {
                 R.id.todo_menu_item -> {
-                    beginTransaction(fragmentManager, fragmentContainerId, TasksFragment.newInstance())
+                    beginTransaction(fragmentManager, fragmentContainerId, TodoFragment())
                     true
                 }
 
                 R.id.profile_menu_item -> {
-                    beginTransaction(fragmentManager, fragmentContainerId, ProfileFragment.newInstance())
+                    beginTransaction(fragmentManager, fragmentContainerId, ProfileFragment())
                     true
                 }
 
                 else -> false
             }
         }
+    }
+
+    private fun setInvisibleTintMode(menuItem: MenuItem) {
+        MenuItemCompat.setIconTintMode(menuItem, PorterDuff.Mode.DST)
     }
 
     private fun beginTransaction(
@@ -100,6 +94,12 @@ class MainActivity : AppCompatActivity() {
             .beginTransaction()
             .replace(fragmentContainerId, fragment)
             .commit()
+    }
+
+    private fun initObservers(owner: LifecycleOwner) {
+        mainViewModel.userDetails.observe(owner) { user ->
+            changeProfileMenuItem(user)
+        }
     }
 
     private fun changeProfileMenuItem(user: User) {

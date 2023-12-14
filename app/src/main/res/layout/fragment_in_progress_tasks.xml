@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.tasks.in_progress_tasks.InProgressTasksFragment">
+    tools:context=".ui.todo.in_progress_tasks.InProgressTasksFragment">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/in_progress_tasks_recycler"

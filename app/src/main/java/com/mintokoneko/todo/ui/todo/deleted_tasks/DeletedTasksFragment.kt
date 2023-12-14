@@ -1,4 +1,4 @@
-package com.mintokoneko.todo.ui.tasks.deleted_tasks
+package com.mintokoneko.todo.ui.todo.deleted_tasks
 
 import android.content.Context
 import android.os.Bundle
@@ -8,10 +8,10 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.mintokoneko.todo.adapters.TaskAdapter
+import com.mintokoneko.todo.base.BaseViewModelProvider
 import com.mintokoneko.todo.databinding.FragmentDeletedTasksBinding
 import com.mintokoneko.todo.repositories.TasksRepository
-import com.mintokoneko.todo.ui.tasks.deleted_tasks.view_model.DeletedTasksViewModel
-import com.mintokoneko.todo.base.BaseViewModelProvider
+import com.mintokoneko.todo.ui.todo.deleted_tasks.view_model.DeletedTasksViewModel
 
 
 class DeletedTasksFragment : Fragment() {
@@ -33,16 +33,15 @@ class DeletedTasksFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         val context = requireContext()
-
         initTasksViewModel(this, context)
         setupRecyclers(context)
         initObservers()
     }
 
-    private fun initObservers() {
-        deletedTasksViewModel.deletedTasks.observe(viewLifecycleOwner) { deletedTasks ->
-            taskAdapter.submitList(deletedTasks)
-        }
+    private fun initTasksViewModel(fragment: Fragment, context: Context) {
+        val tasksRepository = TasksRepository.getInstance(context)
+        deletedTasksViewModel =
+            BaseViewModelProvider.getInstance().getViewModel(fragment, tasksRepository)
     }
 
     private fun setupRecyclers(context: Context) {
@@ -60,17 +59,13 @@ class DeletedTasksFragment : Fragment() {
         }
     }
 
-    private fun initTasksViewModel(fragment: Fragment, context: Context) {
-        val tasksRepository = TasksRepository.getInstance(context)
-        deletedTasksViewModel = BaseViewModelProvider.getInstance().getViewModel(fragment, tasksRepository)
+    private fun initObservers() {
+        deletedTasksViewModel.deletedTasks.observe(viewLifecycleOwner) { deletedTasks ->
+            taskAdapter.submitList(deletedTasks)
+        }
     }
 
     companion object {
-
-        @JvmStatic
-        fun newInstance() =
-            DeletedTasksFragment().apply {
-                arguments = Bundle().apply { }
-            }
+        const val DELETED_TASKS_FRAGMENT_TAG = "Deleted tasks"
     }
 }
